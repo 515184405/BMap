@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+  <title>交通地图 - 2018年中华医学会放射治疗技术学学术会议</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" /> 
+  <meta name="apple-mobile-web-app-capable" content="yes" /> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+  <link rel="stylesheet" type="text/css" href="index_files/index.css">
+  <script src="./index_files/jquery-1.9.1.min.js"></script> 
+
+  <script>
+        (function(win) {
+        var doc = win.document,
+            scale = 16,
+            $body = doc.getElementsByTagName('body')[0],
+            $html = doc.getElementsByTagName('html')[0],
+            deviceAgent = navigator.userAgent.toLowerCase(),
+            windowWidth = win.innerWidth;
+            windowHeight = win.innerHeight;
+            if ( deviceAgent.match( /(iphone|ipod|ipad|android|windows\s*phone|symbianos)/ ) ) {
+                try{
+                   // if ( window.localStorage && window.localStorage.getItem('scale_greatboy') ) {
+                    //    scale = window.localStorage.getItem('scale_greatboy');
+                   // } else {
+                        scale = parseFloat(windowWidth * 16 / (16*3.2));
+                        if (windowHeight > windowWidth) {
+                            //window.localStorage && window.localStorage.setItem('scale_greatboy', scale);
+                        }
+                   // }
+                }catch(e){
+
+                }
+                if (deviceAgent.match(/android\s*2.3/) && deviceAgent.match(/micromessenger/)) {
+                    scale = 16;
+                }
+                $html.style.fontSize = scale + 'px';
+                $html.style.display = 'block';
+            } else {
+                window.onresize = function(){
+                    windowWidth = doc.documentElement && doc.documentElement.clientWidth || doc.body.clientWidth || win.innerWidth;
+                    scale = parseFloat(windowWidth * 16 / (16*3.2));
+                    if(scale > 150){
+                        scale = 150;
+                    }
+                    $html.style.fontSize = scale + 'px';
+                };
+                scale = parseFloat(windowWidth * 16 / (16*3.2));
+                if(scale > 150){
+                    scale = 150;
+                }
+                $html.style.fontSize = scale + 'px';
+                $html.style.display = 'block';
+            }
+        })(window);
+    </script> 
+ </head> 
+ <body class="mui-ios mui-ios-9 mui-ios-9-1"> 
+  <header class="mui-bar mui-bar-nav app-bg"> 
+   <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
+     <img src="images/back.png"/>
+   </a> 
+   <a id="info" class="mui-icon mui-icon-home mui-pull-right" href="http://fljs2018.meeting.so/mini_site/main/index/cn/3867">
+     <img src="images/home.png"/>
+   </a> 
+   <h1 class="mui-title">交通地图 - 2018年中华医学会放射治疗技术学学术会议</h1> 
+  </header> 
+  <div class="mui-content"> 
+   <div class="page-content"> 
+    <div id="news_content"> 
+     <div class="conf-traffic-wrapper"> 
+      <div class="desc-content" id="map"> 
+      </div> 
+      <div class="desc-traffic"> 
+       <div class="traffic-line-title">
+         车站
+        <i>|</i>机场 
+        <span class="fr close-map"></span> 
+       </div> 
+       <div class="traffic-line-content"> 
+        <div id="line-content"> 
+        </div> 
+        <div id="bus_route"> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="block50"></div> 
+  <div id="footer">
+    技术支持: 
+   <a href="http://www.meeting.so/">北京合创智会科技有限公司</a> 
+  </div> 
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PgC2e8rKgVAa0eeq1co6RLz8"></script> 
+  <script language="javascript">
+var strartpoint=["\u6c88\u9633\u6843\u4ed9\u673a\u573a","\u6c88\u9633\u7ad9","\u6c88\u9633\u5317\u7ad9","\u6c88\u9633\u5357\u7ad9"];;
+var address="沈阳碧桂园玛丽蒂姆酒店";
+var city="沈阳市";
+var windowWidth =  window.innerWidth;
+var windowHeight =  window.innerHeight;
+if(windowWidth<1080){
+    var marker_width=160;
+    var marker_height=30;
+}else{
+    var marker_width=360;
+    var marker_height=50;
+}
+
+</script> 
+  <script type="text/javascript" src="./index_files/maplib.js"></script> 
+  <script language="javascript">
+
+
+
+    $('.close-map').on('click', function(){
+        if($('.desc-traffic').hasClass('desc-hide')){
+            $("#news_content").css('overflow','auto');
+            $('.desc-traffic').removeClass('desc-hide');
+            $('#map').removeClass('desc-content2');
+            $('#map').addClass('desc-content');
+        } else{
+            $("#news_content").css('overflow','hidden');
+            $('.desc-traffic').addClass('desc-hide');
+            $('#map').addClass('desc-content2');
+            $('#map').removeClass('desc-content');
+        }
+    });
+
+    var winHeight = $(window).height();
+    var mTop = parseInt($('.desc-traffic').css('margin-top'));
+    $(window).scroll(function(){
+        var scrollTop = $(window).scrollTop() + 3;
+        $('.traffic-line-content').css('overflow','hidden');
+        console.log((winHeight - mTop),scrollTop)
+        if(winHeight - mTop < scrollTop){
+            $('.traffic-line-content').css('overflow','auto');
+        }
+
+    })
+</script>  
+ </body>
+</html>
